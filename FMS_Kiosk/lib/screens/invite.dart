@@ -23,7 +23,6 @@ import 'package:my_demo/viewmodel/login_viewmodel.dart';
 import 'package:my_demo/screens/emptyFeedback.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 import 'boxanswer.dart';
 import 'emotionanswer_with_image.dart';
 import 'invite_without_gift.dart';
@@ -145,131 +144,110 @@ class InviteState extends State<Invite> {
               },
             ),
             body: Column(
-          children: [
-            Row(
               children: [
-                Padding(
-                  padding: EdgeInsets.only(top: 0.0),
-                  child: Container(
-                    child: Image.network(
-                      widget.myFeedback.image,
-                      height: MediaQuery.of(context).size.height * 0.25,
+                Row(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: 0.0),
+                      child: Container(
+                        child: Image.network(
+                          widget.myFeedback.image,
+                          height: MediaQuery.of(context).size.height * 0.25,
+                        ),
+                        alignment: Alignment.topLeft,
+                      ),
                     ),
-                    alignment: Alignment.topLeft,
-                  ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.02,
+                          left: MediaQuery.of(context).size.width * 0.07,
+                          right: MediaQuery.of(context).size.width * 0.02),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.5,
+                        child: AutoSizeText(
+                          widget.myFeedback.title,
+                          textAlign: TextAlign.left,
+                          overflow: TextOverflow.clip,
+                          maxLines: 2,
+                          style: TextStyle(
+                            color: titleColor,
+                            fontSize: MediaQuery.of(context).size.height * 0.1,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.02,
-                      left: MediaQuery.of(context).size.width * 0.08,
-                      right: MediaQuery.of(context).size.width * 0.02),
+                      top: MediaQuery.of(context).size.height * 0.04,
+                      left: MediaQuery.of(context).size.width * 0.2),
                   child: Container(
-                    width: MediaQuery.of(context).size.width * 0.7,
-                    child: AutoSizeText(
-                      widget.myFeedback.title,
-                      textAlign: TextAlign.left,
-                      overflow: TextOverflow.clip,
-                      maxLines: 2,
-                      style: TextStyle(
-                        color: titleColor,
-                        fontSize: MediaQuery.of(context).size.height * 0.1,
-                        fontWeight: FontWeight.bold,
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      height: MediaQuery.of(context).size.height * 0.3,
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: MediaQuery.of(context).size.width * 0.02),
+                            child: Container(
+                                width:
+                                    MediaQuery.of(context).size.height * 0.25,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.25,
+                                alignment: Alignment.centerLeft,
+                                decoration: new BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: new DecorationImage(
+                                        fit: BoxFit.fill,
+                                        image: new ExactAssetImage(
+                                            'assets/gift.gif')))),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: MediaQuery.of(context).size.width * 0.02,
+                                right:
+                                    MediaQuery.of(context).size.width * 0.02),
+                            child: Container(
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: AutoSizeText(
+                                  widget.myFeedback.description,
+                                  textAlign: TextAlign.left,
+                                  overflow: TextOverflow.clip,
+                                  maxLines: 3,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize:
+                                        MediaQuery.of(context).size.height *
+                                            0.067,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                )),
+                          ),
+                        ],
                       ),
-                    ),
-                  ),
-                )
-              ],
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.04,
-                  left: MediaQuery.of(context).size.width * 0.2),
-              child: Container(
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  height: MediaQuery.of(context).size.height * 0.3,
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width * 0.02),
-                        child: Container(
-                            width: MediaQuery.of(context).size.height * 0.25,
-                            height: MediaQuery.of(context).size.height * 0.25,
-                            alignment: Alignment.centerLeft,
-                            decoration: new BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: new DecorationImage(
-                                    fit: BoxFit.fill,
-                                    image: new ExactAssetImage(
-                                        'assets/gift.gif')))),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width * 0.02,
-                            right: MediaQuery.of(context).size.width * 0.02),
-                        child: Container(
-                            width: MediaQuery.of(context).size.width * 0.5,
-                            child: AutoSizeText(
-                              widget.myFeedback.description,
-                              textAlign: TextAlign.left,
-                              overflow: TextOverflow.clip,
-                              maxLines: 3,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize:
-                                    MediaQuery.of(context).size.height * 0.067,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            )),
-                      ),
-                    ],
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: new BorderRadius.only(
-                        topLeft: Radius.circular(
-                            MediaQuery.of(context).size.height * 0.15),
-                        bottomLeft: Radius.circular(
-                            MediaQuery.of(context).size.height * 0.15)),
-                    color: giftColor,
-                  )),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.1),
-              child: SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.1,
-                  width: MediaQuery.of(context).size.width * 0.4,
-                  child: FlatButton(
-                    child: Text(
-                      "Tham gia ngay",
-                      style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.height * 0.061),
-                    ),
-                    color: buttonColor,
-                    textColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(40.0))),
-                    onPressed: () {
-                      navigateToQuestion(0);
-                    },
-                  )),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.07,
-                right: MediaQuery.of(context).size.width * 0.5,
-              ),
-              child: Container(
-                  width: MediaQuery.of(context).size.width * 0.4,
-                  alignment: Alignment.centerLeft,
+                      decoration: BoxDecoration(
+                        borderRadius: new BorderRadius.only(
+                            topLeft: Radius.circular(
+                                MediaQuery.of(context).size.height * 0.15),
+                            bottomLeft: Radius.circular(
+                                MediaQuery.of(context).size.height * 0.15)),
+                        color: giftColor,
+                      )),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.1),
                   child: SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.07,
+                      height: MediaQuery.of(context).size.height * 0.1,
+                      width: MediaQuery.of(context).size.width * 0.4,
                       child: FlatButton(
                         child: Text(
-                          "Ý kiến cá nhân",
+                          "Tham gia ngay",
                           style: TextStyle(
                               fontSize:
-                                  MediaQuery.of(context).size.height * 0.046),
+                                  MediaQuery.of(context).size.height * 0.061),
                         ),
                         color: buttonColor,
                         textColor: Colors.white,
@@ -277,17 +255,44 @@ class InviteState extends State<Invite> {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(40.0))),
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => PersonalIdea(
-                                        myFeedback: widget.myFeedback,
-                                      )));
+                          navigateToQuestion(0);
                         },
-                      ))),
-            )
-          ],
-        )));
+                      )),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.07,
+                    right: MediaQuery.of(context).size.width * 0.5,
+                  ),
+                  child: Container(
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      alignment: Alignment.centerLeft,
+                      child: SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.07,
+                          child: FlatButton(
+                            child: Text(
+                              "Ý kiến cá nhân",
+                              style: TextStyle(
+                                  fontSize: MediaQuery.of(context).size.height *
+                                      0.046),
+                            ),
+                            color: buttonColor,
+                            textColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(40.0))),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => PersonalIdea(
+                                            myFeedback: widget.myFeedback,
+                                          )));
+                            },
+                          ))),
+                )
+              ],
+            )));
   }
 
   void navigateToQuestion(int sequence) {
@@ -373,7 +378,8 @@ class InviteState extends State<Invite> {
       context: context,
       builder: (BuildContext context) {
         return SimpleDialog(
-            title: const Text('Màu chủ đề',
+            title: const Text(
+              'Màu chủ đề',
               style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
@@ -393,7 +399,7 @@ class InviteState extends State<Invite> {
   List<SimpleDialogOption> getListColorOption() {
     List<SimpleDialogOption> list = [];
     listColors.forEach((element) {
-      list.add( SimpleDialogOption(
+      list.add(SimpleDialogOption(
         child: Row(
           children: [
             Container(
@@ -407,7 +413,8 @@ class InviteState extends State<Invite> {
             Container(
               width: 20,
             ),
-            Text(element.colorName,
+            Text(
+              element.colorName,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -417,25 +424,32 @@ class InviteState extends State<Invite> {
         ),
         onPressed: () {
           chooseColor(element.colorName);
-        },));
+        },
+      ));
     });
 
     return list;
   }
 
-  void getColorFromLocal() async{
+  void getColorFromLocal() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      titleColor = prefs.get('TITLE_COLOR') == null ? Color(0xffff6d00) : Color(prefs.get('TITLE_COLOR'));
-      giftColor = prefs.get('GIFT_COLOR') == null ? Color(0xffff7043) : Color(prefs.get('GIFT_COLOR'));
-      buttonColor = prefs.get('BUTTON_COLOR') == null ? Color(0xffff6d00) : Color(prefs.get('BUTTON_COLOR'));
+      titleColor = prefs.get('TITLE_COLOR') == null
+          ? Color(0xffff6d00)
+          : Color(prefs.get('TITLE_COLOR'));
+      giftColor = prefs.get('GIFT_COLOR') == null
+          ? Color(0xffff7043)
+          : Color(prefs.get('GIFT_COLOR'));
+      buttonColor = prefs.get('BUTTON_COLOR') == null
+          ? Color(0xffff6d00)
+          : Color(prefs.get('BUTTON_COLOR'));
     });
   }
 
-  void chooseColor(String colorName) async{
+  void chooseColor(String colorName) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     listColors.forEach((element) {
-      if (colorName == element.colorName){
+      if (colorName == element.colorName) {
         setState(() {
           titleColor = Color(element.titleColor);
           giftColor = Color(element.giftColor);
@@ -457,18 +471,13 @@ class FMSColor {
   int giftColor;
   int buttonColor;
 
-  FMSColor({
-    this.colorName,
-    this.titleColor,
-    this.giftColor,
-    this.buttonColor
-  });
+  FMSColor({this.colorName, this.titleColor, this.giftColor, this.buttonColor});
 
-  FMSColor.withParams(String colorName, int titleColor, int giftColor, int buttonColor){
+  FMSColor.withParams(
+      String colorName, int titleColor, int giftColor, int buttonColor) {
     this.colorName = colorName;
     this.titleColor = titleColor;
     this.giftColor = giftColor;
     this.buttonColor = buttonColor;
   }
 }
-

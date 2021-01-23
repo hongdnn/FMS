@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:http/io_client.dart';
 import 'package:my_demo/model/loginresult.dart';
 import 'dart:convert';
 import 'package:my_demo/model/myfeedback.dart';
@@ -9,8 +11,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class MyFeedbackApiProvider {
   Future<LoginResult> loginEquipment(LoginViewModel loginViewModel) async {
-    http.Response response = await http.post(
-      'http://pricingfmsapi.azurewebsites.net/api/v1/equipments/login.json',
+    HttpClient httpClient = new HttpClient()
+      ..badCertificateCallback =
+          ((X509Certificate cert, String host, int port) => true);
+    IOClient ioClient = new IOClient(httpClient);
+    http.Response response =
+        //await http.post(
+        //'http://pricingfmsapi.azurewebsites.net/api/v1/equipments/login.json',
+        await ioClient.post(
+      'https://10.0.2.2:5001/api/v1/equipments/login.json',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -41,8 +50,15 @@ class MyFeedbackApiProvider {
 
   Future<int> sendResponse(List<MyResponse> listResponse) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    http.Response response = await http.post(
-      'http://pricingfmsapi.azurewebsites.net/api/v1/responses',
+    HttpClient httpClient = new HttpClient()
+      ..badCertificateCallback =
+          ((X509Certificate cert, String host, int port) => true);
+    IOClient ioClient = new IOClient(httpClient);
+    http.Response response =
+        // await http.post(
+        // 'http://pricingfmsapi.azurewebsites.net/api/v1/responses',
+        await ioClient.post(
+      'https://10.0.2.2:5001/api/v1/responses',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer ' + prefs.getString('ACCESS_TOKEN'),
@@ -97,9 +113,16 @@ class MyFeedbackApiProvider {
 
   Future<bool> sendFCMToken(String fcmToken) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    final http.Response response = await http.get(
-      'http://pricingfmsapi.azurewebsites.net/api/v1/equipments/fcmtokens?t=' +
-          fcmToken,
+    HttpClient httpClient = new HttpClient()
+      ..badCertificateCallback =
+          ((X509Certificate cert, String host, int port) => true);
+    IOClient ioClient = new IOClient(httpClient);
+    http.Response response =
+        // await http.get(
+        // 'http://pricingfmsapi.azurewebsites.net/api/v1/equipments/fcmtokens?t=' +
+        //     fcmToken,
+        await ioClient.get(
+      'https://10.0.2.2:5001/api/v1/equipments/fcmtokens?t=' + fcmToken,
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer ' + prefs.getString('ACCESS_TOKEN'),
@@ -114,8 +137,15 @@ class MyFeedbackApiProvider {
 
   Future<MyFeedback> getFeedback() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    final http.Response response = await http.get(
-      'http://pricingfmsapi.azurewebsites.net/api/v1/questions',
+    HttpClient httpClient = new HttpClient()
+      ..badCertificateCallback =
+          ((X509Certificate cert, String host, int port) => true);
+    IOClient ioClient = new IOClient(httpClient);
+    http.Response response =
+        // await http.get(
+        // 'http://pricingfmsapi.azurewebsites.net/api/v1/questions',
+        await ioClient.get(
+      'https://10.0.2.2:5001/api/v1/questions',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': "Bearer " + prefs.getString('ACCESS_TOKEN'),
@@ -151,8 +181,15 @@ class MyFeedbackApiProvider {
 
   Future<bool> sendGiftToMail(String email) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    http.Response response = await http.post(
-      'http://pricingfmsapi.azurewebsites.net/api/v1/gifts/emails',
+    HttpClient httpClient = new HttpClient()
+      ..badCertificateCallback =
+          ((X509Certificate cert, String host, int port) => true);
+    IOClient ioClient = new IOClient(httpClient);
+    http.Response response =
+        // await http.post(
+        // 'http://pricingfmsapi.azurewebsites.net/api/v1/gifts/emails',
+        await ioClient.post(
+      'https://10.0.2.2:5001/api/v1/gifts/emails',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer ' + prefs.getString('ACCESS_TOKEN'),
